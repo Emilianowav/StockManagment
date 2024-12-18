@@ -5,32 +5,28 @@ _______________Scafolding inicial_______________
 src/
 │
 ├── app/
-│   ├── page.tsx                    // Página principal, vista general
-│   ├── inventory/                  // Carpeta para la gestión de inventarios
-│   │   ├── page.tsx                // Vista del inventario
-│   │   ├── product/[id]/page.tsx   // Vista de detalle de producto
-│   │   └── category/page.tsx       // Vista de gestión de categorías
-│   └── dashboard/                  // Carpeta para el dashboard de administrador
-│       └── page.tsx                // Página del dashboard de administración
+│   ├── page.tsx                     // Página principal que cargará el Sidebar y renderizará módulos
+│   ├── dashboard/                   // Carpeta para el dashboard de administración
+│   │   └── page.tsx                 // Página principal del Dashboard (cargará módulos)
 │
-├── components/                     // Componentes reutilizables
-│   ├── ProductList.tsx             // Lista de productos
-│   ├── ProductCard.tsx             // Card de producto individual
-│   ├── ProductForm.tsx             // Formulario de agregar/editar producto
-│   ├── CategoryList.tsx            // Lista de categorías
-│   ├── CategoryForm.tsx           // Formulario para agregar/editar categoría
-│   ├── Sidebar.tsx                 // Barra lateral de navegación
-│   ├── Modal.tsx                   // Componente Modal
-│   ├── Notification.tsx            // Componente de notificación
-│   └── FilterPanel.tsx             // Filtros dinámicos para las vistas
+├── components/                      // Componentes reutilizables
+│   ├── Sidebar.tsx                  // Barra lateral para cambiar vistas dentro del dashboard
+│   ├── ProductList.tsx              // Lista de productos (módulo)
+│   ├── ProductCard.tsx              // Card de producto individual (componente reutilizable)
+│   ├── ProductForm.tsx              // Formulario de agregar/editar producto (módulo)
+│   ├── CategoryList.tsx             // Lista de categorías (módulo)
+│   ├── CategoryForm.tsx            // Formulario para agregar/editar categoría (módulo)
+│   ├── Modal.tsx                    // Componente Modal reutilizable
+│   ├── Notification.tsx             // Componente de notificación
+│   └── FilterPanel.tsx              // Filtros dinámicos para las vistas (componente reutilizable)
 │
-├── styles/                         // Estilos globales
-│   ├── globals.css
-│   └── inventory.module.css       // Estilos específicos para inventario
+├── styles/                          // Estilos globales y específicos de vistas
+│   ├── globals.css                  // Estilos globales
+│   └── dashboard.module.css         // Estilos específicos para el dashboard
 │
-└── utils/                          // Funciones utilitarias
-    ├── fetcher.ts                 // Funciones de fetch para manejar APIs
-    └── validators.ts              // Validaciones de formularios, entradas, etc.
+└── utils/                           // Funciones utilitarias
+    ├── fetcher.ts                   // Funciones para manejar APIs
+    └── validators.ts                // Validaciones de formularios, entradas, etc.
 
 ________________________________________________________________________________________
 
@@ -115,3 +111,4 @@ Categorías
 
 Dashboard (administración)
 /dashboard → Página de administración para gestión avanzada.
+
