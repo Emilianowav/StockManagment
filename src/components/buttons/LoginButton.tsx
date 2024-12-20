@@ -1,31 +1,36 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import Modal from "./modal";  // Importamos el modal
+import Modal from "../modals/LoginModal"; // Importamos el modal
 import styles from "./LoginButton.module.css";
 
-const LoginButton = () => {
+interface LoginButtonProps {
+  onLoginSuccess: () => void; // Callback que se llama cuando el login es exitoso
+}
+
+const LoginButton: React.FC<LoginButtonProps> = ({ onLoginSuccess }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [_error, setError] = useState<string>("");
 
-  // Función para abrir y cerrar el modal
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen((prev) => !prev);
   };
 
-  // Función para manejar el envío del formulario
+  const showError = (message: string) => {
+    setError(message);
+    setTimeout(() => setError(""), 7000); 
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Aquí se podría agregar validación adicional
+
     if (!username || !password) {
-      setError("Por favor ingrese usuario y contraseña.");
+      showError("Por favor ingrese usuario y contraseña.");
       return;
     }
 
     try {
-      // Realizar la solicitud al backend (por ejemplo, una API REST)
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -37,28 +42,27 @@ const LoginButton = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Aquí puedes manejar lo que pasa si el login es exitoso
-        console.log("Login exitoso", data);
-        toggleModal(); // Cierra el modal si el login es exitoso
+        onLoginSuccess(); // Llamamos al callback para indicar que el login fue exitoso
+        toggleModal(); // Cierra el modal
       } else {
-        setError(data.message || "Error en el login.");
+        showError(data.message || "Error en el login.");
       }
     } catch (error) {
-      setError("Hubo un error en la solicitud.");
+      showError("Ocurrió un error en el servidor. Inténtalo más tarde.");
     }
   };
 
   return (
     <>
       <button className={styles.loginButton} onClick={toggleModal}>
-        Iniciar sesión
+        Ingresar
       </button>
       {isModalOpen && (
         <Modal closeModal={toggleModal}>
           <div className={styles.modalContent}>
-            <h2>Iniciar sesión</h2>
-            {error && <p className={styles.error}>{error}</p>}
-            <form onSubmit={handleLogin}>
+            <h2 className={styles.title}>Iniciar sesión</h2>
+            {_error && <p className={styles.error}>{_error}</p>} 
+            <form onSubmit={handleLogin} className={styles.form}>
               <input
                 className={styles.input}
                 type="text"
@@ -75,7 +79,9 @@ const LoginButton = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button className={styles.button} type="submit">Entrar</button>
+              <button className={styles.button} type="submit">
+                Entrar
+              </button>
             </form>
           </div>
         </Modal>
