@@ -1,6 +1,6 @@
 // components/Modal.tsx
 import React from "react";
-import styles from "./Modal.module.css";
+import styles from "./LoginModal.module.css";
 
 type ModalProps = {
   closeModal: () => void;

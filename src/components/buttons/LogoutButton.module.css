@@ -1,0 +1,32 @@
+.logoutButton {
+    padding: 16px;
+    font-size: 16px; 
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logoutButton:hover {
+    background-color: rgb(218, 145, 155); 
+  }
+  
+  .logoutButton:active {
+    background-color: #c12b2b; /* Color aún más oscuro al hacer clic */
+  }
+  
+  .greetingContainer {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .greeting {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .logoutButton {
+    padding: 8px 16px; /* Ajustado para ser un poco más pequeño */
+  }
+  
